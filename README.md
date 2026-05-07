@@ -1,4 +1,4 @@
-# 🚀 OptiChrome Pro
+# 🚀 OptiChrome
 
 ## Rendimiento Extremo para Chrome en PCs de Gama Baja
 
@@ -20,7 +20,7 @@
 
 **OptiChrome** es una extensión de Chrome de código abierto diseñada específicamente para **maximizar el rendimiento en ordenadores con recursos limitados**. Si tu PC lucha con Chrome, si YouTube consume toda tu RAM, o simplemente quieres revivir la nostalgia de internet rápido: esta es tu extensión.
 
-Con tecnología de **suspensión inteligente de pestañas**, **listas blancas personalizables** y un **módulo de optimización extrema para YouTube**, OptiChrome Pro mantiene tu navegación fluida sin sacrificar funcionalidad.
+Con tecnología de **suspensión inteligente de pestañas**, **listas blancas personalizables** y un **módulo de optimización extrema para YouTube**, OptiChrome mantiene tu navegación fluida sin sacrificar funcionalidad.
 
 🎯 **Misión:** Demostrar que el rendimiento y la privacidad no están reservados para PCs gamer.
 
@@ -117,7 +117,7 @@ Un inyector de CSS que desactiva elementos pesados **antes de que carguen**, no 
    - Selecciona la carpeta del proyecto (donde está `manifest.json`)
 
 5. **¡Listo!** ✨
-   - Verás el icono de OptiChrome Pro en tu barra de herramientas
+   - Verás el icono de OptiChrome en tu barra de herramientas
    - Haz clic para abrir la ventana de configuración
 
 #### **Opciones Alternativas**
@@ -189,7 +189,7 @@ OptiChrome-Pro/
 
 ### Configuración Básica
 
-1. **Abre la ventana de OptiChrome Pro** - Haz clic en el icono en la barra de herramientas
+1. **Abre la ventana de OptiChrome** - Haz clic en el icono en la barra de herramientas
 
 2. **Selecciona tu modo:**
    - 🎮 **Manual:** Congela pestañas cuando lo necesites con un botón
@@ -246,7 +246,7 @@ OptiChrome-Pro/
 
 ## 💰 Apoyar el Proyecto
 
-Si OptiChrome Pro te ha ayudado a revivir tu PC, hay formas de apoyar el desarrollo:
+Si OptiChrome te ha ayudado a revivir tu PC, hay formas de apoyar el desarrollo:
 
 ### ⭐ Más Valioso que Dinero
 
