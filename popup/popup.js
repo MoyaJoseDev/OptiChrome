@@ -1,3 +1,5 @@
+import { defaultSafeZones } from '../safezones.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const switchView = (hide, show) => { hide.classList.add('hidden'); show.classList.remove('hidden'); };
   
@@ -7,35 +9,40 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('backFromWhitelist').onclick = () => switchView(viewWL, viewMain);
   document.getElementById('backFromAdvanced').onclick = () => switchView(viewAdv, viewMain);
 
-  const defaultSafeZones = ["gemini", "chatgpt", "openai", "claude", "anthropic", "youtube"]; // Acortado aquí por legibilidad, usa tu lista completa
+  // Acordeones Desplegables
+  const accordions = document.querySelectorAll('.accordion-btn');
+  accordions.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const panel = this.nextElementSibling;
+      panel.classList.toggle('active');
+      const arrow = this.querySelector('.arrow');
+      arrow.textContent = panel.classList.contains('active') ? '▲' : '▼';
+    });
+  });
 
-  // Elementos
   const btnManual = document.getElementById('btnManual'), toggleAuto = document.getElementById('toggleAuto'), inputSeconds = document.getElementById('inputSeconds');
   const inputSite = document.getElementById('inputSite'), btnAddSite = document.getElementById('btnAddSite'), siteList = document.getElementById('siteList');
-  // Añadimos las nuevas opciones al array
+  
   const ytIds = ['ytAmbient', 'ytPreviews', 'ytChat', 'ytComments', 'ytRetro', 'ytNoShorts', 'ytNoSkeletons'];
   const ytElements = ytIds.map(id => document.getElementById(id));
 
-  // Cargar
+  // Cargar datos
   chrome.storage.sync.get({ 
     whitelist: defaultSafeZones, autoMode: false, intervalSeconds: 300, 
-    ytAmbient: false, ytPreviews: false, ytChat: false, ytComments: false,
-    ytRetro: false, ytNoShorts: false, ytNoSkeletons: false 
+    ytAmbient: false, ytPreviews: false, ytChat: false, ytComments: false, ytRetro: false, ytNoShorts: false, ytNoSkeletons: false
   }, (data) => {
     toggleAuto.checked = data.autoMode; inputSeconds.value = data.intervalSeconds;
     ytElements.forEach((el, i) => el.checked = data[ytIds[i]]);
     renderList(data.whitelist);
   });
 
-  // Guardar YT
+  // Guardar datos
   ytElements.forEach((el, i) => el.addEventListener('change', () => chrome.storage.sync.set({ [ytIds[i]]: el.checked })));
-
-  // Acciones Core
+  
   btnManual.onclick = () => { chrome.runtime.sendMessage({ action: "forceClean" }); };
   toggleAuto.onchange = () => chrome.storage.sync.set({ autoMode: toggleAuto.checked });
   inputSeconds.onchange = () => chrome.storage.sync.set({ intervalSeconds: Math.max(10, parseInt(inputSeconds.value) || 300) });
 
-  // Whitelist Logic
   btnAddSite.onclick = () => {
     const site = inputSite.value.trim().toLowerCase();
     if (site) chrome.storage.sync.get({ whitelist: [] }, (data) => {

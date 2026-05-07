@@ -41,3 +41,34 @@ li { display: flex; justify-content: space-between; padding: 8px 10px; border-bo
 .actions { display: flex; gap: 4px; }
 .btn-icon { background: none; border: none; cursor: pointer; border-radius: 4px; padding: 4px; font-size: 12px; }
 .btn-reset { width: 100%; background: transparent; color: var(--text-muted); border: 1px dashed var(--border); padding: 8px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
+
+/* Estilos para los Desplegables (Acordeones) */
+.accordion-btn { width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; margin-bottom: 8px; font-size: 14px; }
+.accordion-btn:hover { background: #f1f5f9; }
+.accordion-content { display: none; padding: 0 4px 10px 4px; margin-bottom: 10px; }
+.accordion-content.active { display: block; }
+.yt-theme { color: #b91c1c; border-left: 4px solid #ef4444; }
+.wa-theme { color: #15803d; border-left: 4px solid #22c55e; }
+.wa-card { border-color: #22c55e; background: #f0fdf4; }
+
+/* ================= ESTILOS DEL FOOTER (FIRMA) ================= */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.footer a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}

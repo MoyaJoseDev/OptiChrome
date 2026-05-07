@@ -40,34 +40,36 @@
     <button id="btnReset" class="btn-reset">Restablecer predeterminados</button>
   </div>
 
-  <!-- VISTA: AJUSTES AVANZADOS -->
+  <!-- ================= VISTA: AJUSTES AVANZADOS ================= -->
   <div id="view-advanced" class="container hidden">
     <div class="header-nav">
       <button id="backFromAdvanced" class="btn-back">⬅</button>
       <h3>Ajustes Avanzados</h3>
     </div>
     
-    <!-- Módulo OptiYT -->
-    <div class="card yt-card">
-      <h4>🔴 OptiYT (PC Patata)</h4>
-      
-      <!-- Opciones Anteriores -->
-      <div class="setting-row"><span>Modo Ambiente (Brillo)</span><label class="switch"><input type="checkbox" id="ytAmbient"><span class="slider"></span></label></div>
-      <div class="setting-row"><span>Vistas Previas</span><label class="switch"><input type="checkbox" id="ytPreviews"><span class="slider"></span></label></div>
-      <div class="setting-row"><span>Chat en Vivo</span><label class="switch"><input type="checkbox" id="ytChat"><span class="slider"></span></label></div>
-      <div class="setting-row"><span>Comentarios</span><label class="switch"><input type="checkbox" id="ytComments"><span class="slider"></span></label></div>
-      
-      <hr style="border: 0; border-top: 1px solid #fca5a5; margin: 10px 0;">
-      
-      <!-- Nuevas Opciones de Aceleración -->
-      <h4 style="margin: 0 0 10px 0; color: #b91c1c; font-size: 13px;">🚀 Rendimiento Extremo</h4>
-      
-      <div class="setting-row"><span>Diseño 2000s (Anti-Lag)</span><label class="switch"><input type="checkbox" id="ytRetro"><span class="slider"></span></label></div>
-      <div class="setting-row"><span>Bloquear Shorts</span><label class="switch"><input type="checkbox" id="ytNoShorts"><span class="slider"></span></label></div>
-      <div class="setting-row"><span>Quitar Esqueletos de Carga</span><label class="switch"><input type="checkbox" id="ytNoSkeletons"><span class="slider"></span></label></div>
+    <!-- Acordeón 1: YouTube -->
+    <button class="accordion-btn yt-theme">🔴 OptiYT (YouTube) <span class="arrow">▼</span></button>
+    <div class="accordion-content"> <!-- Cerrado por defecto -->
+      <div class="card yt-card">
+        <div class="setting-row"><span>Modo Ambiente</span><label class="switch"><input type="checkbox" id="ytAmbient"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Vistas Previas</span><label class="switch"><input type="checkbox" id="ytPreviews"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Chat en Vivo</span><label class="switch"><input type="checkbox" id="ytChat"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Comentarios</span><label class="switch"><input type="checkbox" id="ytComments"><span class="slider"></span></label></div>
+        <hr style="border: 0; border-top: 1px solid #fca5a5; margin: 10px 0;">
+        <h4 style="margin: 0 0 10px 0; color: #b91c1c; font-size: 13px;">🚀 Rendimiento Extremo</h4>
+        <div class="setting-row"><span>Diseño 2000s</span><label class="switch"><input type="checkbox" id="ytRetro"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Bloquear Shorts</span><label class="switch"><input type="checkbox" id="ytNoShorts"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Sin Esqueletos</span><label class="switch"><input type="checkbox" id="ytNoSkeletons"><span class="slider"></span></label></div>
+      </div>
     </div>
   </div>
 
-  <script src="popup.js"></script>
+  <!-- ================= PIE DE PÁGINA (FIRMA) ================= -->
+  <div class="footer">
+    Proyecto OpenSource desarrollado por 
+    <a href="https://github.com/MoyaJoseDev" target="_blank" rel="noopener noreferrer">José T. Moya</a>
+  </div>
+
+  <script type="module" src="popup.js"></script>
 </body>
 </html>

@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "OptiChrome",
-  "version": "1.0",
-  "description": "Optimización avanzada de RAM y aceleración de sitios web modulares.",
+  "name": "OptiChrome Pro",
+  "version": "2.1",
+  "description": "Optimización de RAM y acelerador de sitios. Proyecto OpenSource desarrollado por José T. Moya.",
   "permissions": ["tabs", "storage", "alarms"],
   "action": {
     "default_popup": "popup/popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {

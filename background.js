@@ -1,24 +1,5 @@
-// Zonas seguras por defecto (Categorizadas para mejor mantenimiento)
-const defaultSafeZones = [
-  // 🤖 Inteligencias Artificiales
-  "gemini", "chatgpt", "openai", "claude", "anthropic", "perplexity", 
-  "poe", "copilot", "huggingface", "midjourney", "phind", "blackbox",
-
-  // 🎓 Plataformas Educativas y LMS
-  "moodle", "canvas", "blackboard", "classroom", "coursera", "udemy", 
-  "platzi", "edx", "quizlet", "kahoot", "duolingo", "khanacademy",
-
-  // 📝 Productividad y Ofimática
-  "docs.google", "sheets.google", "slides.google", "drive.google", "forms", 
-  "notion", "office", "sharepoint", "excel", "word", "evernote", "trello",
-
-  // 💻 Desarrollo, Código y Foros
-  "github", "gitlab", "stackoverflow", "vscode.dev", "github.dev", 
-  "replit", "codepen", "jsfiddle", "devforum", "roblox", "create.roblox", "figma",
-
-  // 📹 Video, Streaming y Comunicación
-  "youtube", "meet.google", "zoom", "teams", "discord", "slack", "twitch", "vimeo"
-];
+// Importamos la lista desde nuestro archivo externo
+import { defaultSafeZones } from './safezones.js';
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
