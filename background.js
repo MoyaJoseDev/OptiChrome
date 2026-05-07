@@ -38,10 +38,25 @@ async function optimizeRAM() {
     tabs.forEach(tab => {
       try {
         const urlLower = tab.url.toLowerCase();
+        
+        // 1. Ignorar páginas internas de Chrome (la causa principal del error)
+        if (urlLower.startsWith('chrome://') || urlLower.startsWith('chrome-extension://')) return;
+        
+        // 2. Ignorar pestañas que YA están congeladas
+        if (tab.discarded) return;
+
+        // Comprobar la lista blanca
         if (!data.whitelist.some(kw => urlLower.includes(kw))) {
-          chrome.tabs.discard(tab.id);
+          
+          // 3. Descartar y "atrapar" (catch) cualquier error silenciosamente
+          chrome.tabs.discard(tab.id).catch(() => {
+             // Chrome protegió esta pestaña por alguna razón interna. Lo ignoramos.
+          });
+          
         }
-      } catch (e) {}
+      } catch (e) {
+        // Errores de lectura de URL ignorados
+      }
     });
   });
 }
