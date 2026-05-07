@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- VISTA PRINCIPAL -->
+  <div id="view-main" class="container">
+    <h2>⚡ OptiChrome</h2>
+    <div class="card">
+      <button id="btnManual" class="btn-manual">Limpiar RAM Ahora</button>
+    </div>
+    <div class="card">
+      <div class="setting-row">
+        <span>Auto-Optimización</span>
+        <label class="switch"><input type="checkbox" id="toggleAuto"><span class="slider"></span></label>
+      </div>
+      <div class="input-group">
+        <span class="text-muted">Intervalo (Segundos):</span>
+        <input type="number" id="inputSeconds" min="10" max="3600">
+      </div>
+    </div>
+    <button id="navToWhitelist" class="btn-nav"><span>🛡️ Sitios Protegidos</span><span class="arrow">➔</span></button>
+    <button id="navToAdvanced" class="btn-nav"><span>⚙️ Ajustes Avanzados</span><span class="arrow">➔</span></button>
+  </div>
+
+  <!-- VISTA: SITIOS PROTEGIDOS -->
+  <div id="view-whitelist" class="container hidden">
+    <div class="header-nav">
+      <button id="backFromWhitelist" class="btn-back">⬅</button>
+      <h3>Sitios Protegidos</h3>
+    </div>
+    <div class="input-group">
+      <input type="text" id="inputSite" placeholder="Ej: github">
+      <button id="btnAddSite" class="btn-add">Añadir</button>
+    </div>
+    <ul id="siteList"></ul>
+    <button id="btnReset" class="btn-reset">Restablecer predeterminados</button>
+  </div>
+
+  <!-- VISTA: AJUSTES AVANZADOS -->
+  <div id="view-advanced" class="container hidden">
+    <div class="header-nav">
+      <button id="backFromAdvanced" class="btn-back">⬅</button>
+      <h3>Ajustes Avanzados</h3>
+    </div>
+    
+    <!-- Módulo OptiYT -->
+    <div class="card yt-card">
+      <h4>🔴 OptiYT (PC Patata)</h4>
+      
+      <!-- Opciones Anteriores -->
+      <div class="setting-row"><span>Modo Ambiente (Brillo)</span><label class="switch"><input type="checkbox" id="ytAmbient"><span class="slider"></span></label></div>
+      <div class="setting-row"><span>Vistas Previas</span><label class="switch"><input type="checkbox" id="ytPreviews"><span class="slider"></span></label></div>
+      <div class="setting-row"><span>Chat en Vivo</span><label class="switch"><input type="checkbox" id="ytChat"><span class="slider"></span></label></div>
+      <div class="setting-row"><span>Comentarios</span><label class="switch"><input type="checkbox" id="ytComments"><span class="slider"></span></label></div>
+      
+      <hr style="border: 0; border-top: 1px solid #fca5a5; margin: 10px 0;">
+      
+      <!-- Nuevas Opciones de Aceleración -->
+      <h4 style="margin: 0 0 10px 0; color: #b91c1c; font-size: 13px;">🚀 Rendimiento Extremo</h4>
+      
+      <div class="setting-row"><span>Diseño 2000s (Anti-Lag)</span><label class="switch"><input type="checkbox" id="ytRetro"><span class="slider"></span></label></div>
+      <div class="setting-row"><span>Bloquear Shorts</span><label class="switch"><input type="checkbox" id="ytNoShorts"><span class="slider"></span></label></div>
+      <div class="setting-row"><span>Quitar Esqueletos de Carga</span><label class="switch"><input type="checkbox" id="ytNoSkeletons"><span class="slider"></span></label></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

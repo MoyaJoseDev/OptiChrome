@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "OptiChrome",
+  "version": "1.0",
+  "description": "Optimización avanzada de RAM y aceleración de sitios web modulares.",
+  "permissions": ["tabs", "storage", "alarms"],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["optimizaciones/youtube.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
