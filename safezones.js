@@ -1,19 +1,42 @@
-// safezones.js - Lista de sitios protegidos por defecto
-// Puedes agregar todos los sitios que quieras aquí abajo separados por comas
+// safezones.js - esta es la lista de sitios que no queremos cerrar nunca.
+// Si querés, podés sumar más nombres aquí abajo.
 
 export const defaultSafeZones = [
-  // 🤖 Inteligencias Artificiales
-  "gemini", "chatgpt", "openai", "claude", "anthropic", "perplexity",
-  
-  // 🎓 Educación
-  "moodle", "canvas", "blackboard", "classroom", "coursera", "udemy",
-  
-  // 📝 Trabajo
-  "docs.google", "sheets.google", "forms", "notion", "office",
-  
-  // 💻 Desarrollo
-  "github", "gitlab", "stackoverflow", "vscode.dev", "roblox", "devforum",
-  
-  // 📹 Comunicación
-  "youtube", "meet.google", "zoom", "discord", "whatsapp"
+  // 🤖 IA y herramientas de conversación
+  "gemini",
+  "chatgpt",
+  "openai",
+  "claude",
+  "anthropic",
+  "perplexity",
+
+  // 🎓 Educación y cursos
+  "moodle",
+  "canvas",
+  "blackboard",
+  "classroom",
+  "coursera",
+  "udemy",
+
+  // 📝 Oficina y productividad
+  "docs.google",
+  "sheets.google",
+  "forms",
+  "notion",
+  "office",
+
+  // 💻 Desarrollo y código
+  "github",
+  "gitlab",
+  "stackoverflow",
+  "vscode.dev",
+  "roblox",
+  "devforum",
+
+  // 📹 Comunicación y reuniones
+  "youtube",
+  "meet.google",
+  "zoom",
+  "discord",
+  "whatsapp",
 ];
