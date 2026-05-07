@@ -1,11 +1,21 @@
 {
   "manifest_version": 3,
   "name": "OptiChrome Pro",
-  "version": "2.1",
-  "description": "Optimización de RAM y acelerador de sitios. Proyecto OpenSource desarrollado por José T. Moya.",
+  "version": "2.4",
+  "description": "Optimiza la RAM congelando pestañas y acelera YouTube con un Modo Retro Anti-Lag. Proyecto OpenSource por José T. Moya.",
   "permissions": ["tabs", "storage", "alarms"],
+  "icons": {
+    "16": "iconos/icon-16.png",
+    "48": "iconos/icon-48.png",
+    "128": "iconos/icon-128.png"
+  },
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "iconos/icon-16.png",
+      "48": "iconos/icon-48.png",
+      "128": "iconos/icon-128.png"
+    }
   },
   "background": {
     "service_worker": "background.js",
