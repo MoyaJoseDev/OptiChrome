@@ -26,6 +26,10 @@
       "matches": ["*://*.youtube.com/*"],
       "js": ["optimizaciones/youtube.js"],
       "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["optimizaciones/throttler.js"]
     }
   ]
 }

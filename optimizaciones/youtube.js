@@ -26,6 +26,22 @@ const ytStyles = {
   // Quita los esqueletos de carga pesada.
   ytNoSkeletons:
     "#ghost-cards, .skeleton-bg-color, ytd-skeleton-header-renderer { display: none !important; }",
+
+  // Quita las fotos de perfil en toda la plataforma (menos carga de imágenes).
+  ytNoAvatars: 
+    "#avatar, yt-img-shadow, .yt-spec-avatar-shape { display: none !important; }",
+
+  // Hace que la barra superior no se quede pegada al bajar (ahorra repintado en la GPU).
+  ytStaticNav: 
+    "ytd-masthead { position: absolute !important; } #page-manager { margin-top: 0 !important; padding-top: 60px !important; }",
+
+  // Diseño compacto: achica el tamaño de las miniaturas en el inicio para que parezca el YT viejo.
+  ytCompactGrid: 
+    "ytd-rich-grid-row { margin-bottom: 0 !important; } ytd-rich-item-renderer { margin-bottom: 10px !important; max-width: 250px !important; } ytd-rich-grid-renderer { --ytd-rich-grid-items-per-row: 6 !important; }",
+
+  // Oculta completamente la barra lateral de videos recomendados al ver un video.
+  ytNoSidebar: 
+    "#secondary { display: none !important; } #primary { max-width: 100% !important; padding-right: 0 !important; }",
 };
 
 const styleNode = document.createElement("style");
@@ -48,6 +64,10 @@ function aplicarYT() {
       "ytRetro",
       "ytNoShorts",
       "ytNoSkeletons",
+      "ytNoAvatars",
+      "ytStaticNav",
+      "ytCompactGrid",
+      "ytNoSidebar",
     ],
     (data) => {
       let css = "";
@@ -58,6 +78,11 @@ function aplicarYT() {
       if (data.ytRetro) css += ytStyles.ytRetro + "\n";
       if (data.ytNoShorts) css += ytStyles.ytNoShorts + "\n";
       if (data.ytNoSkeletons) css += ytStyles.ytNoSkeletons + "\n";
+      // ... dentro de chrome.storage.sync.get ...
+      if (data.ytNoAvatars) css += ytStyles.ytNoAvatars + "\n";
+      if (data.ytStaticNav) css += ytStyles.ytStaticNav + "\n";
+      if (data.ytCompactGrid) css += ytStyles.ytCompactGrid + "\n";
+      if (data.ytNoSidebar) css += ytStyles.ytNoSidebar + "\n";
 
       styleNode.textContent = css;
     },

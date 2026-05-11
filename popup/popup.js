@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Referencias a controles del popup.
   const btnManual = document.getElementById("btnManual"),
     toggleAuto = document.getElementById("toggleAuto"),
-    inputSeconds = document.getElementById("inputSeconds");
+    inputSeconds = document.getElementById("inputSeconds"),
+    cpuThrottle = document.getElementById("cpuThrottle"); // <--- Nuevo
   const inputSite = document.getElementById("inputSite"),
     btnAddSite = document.getElementById("btnAddSite"),
     siteList = document.getElementById("siteList");
@@ -51,6 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "ytRetro",
     "ytNoShorts",
     "ytNoSkeletons",
+    "ytNoAvatars",
+    "ytStaticNav",
+    "ytCompactGrid",
+    "ytNoSidebar",
   ];
   const ytElements = ytIds.map((id) => document.getElementById(id));
 
@@ -60,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       whitelist: defaultSafeZones,
       autoMode: false,
       intervalSeconds: 300,
+      cpuThrottle: false,
       ytAmbient: false,
       ytPreviews: false,
       ytChat: false,
@@ -67,14 +73,24 @@ document.addEventListener("DOMContentLoaded", () => {
       ytRetro: false,
       ytNoShorts: false,
       ytNoSkeletons: false,
+      // Agrega estas líneas:
+      ytNoAvatars: false,
+      ytStaticNav: false,
+      ytCompactGrid: false,
+      ytNoSidebar: false,
     },
     (data) => {
       toggleAuto.checked = data.autoMode;
       inputSeconds.value = data.intervalSeconds;
+      cpuThrottle.checked = data.cpuThrottle;
       ytElements.forEach((el, i) => (el.checked = data[ytIds[i]]));
       renderList(data.whitelist);
     },
   );
+
+  // Guardar cambio de Throttling
+  cpuThrottle.onchange = () =>
+    chrome.storage.sync.set({ cpuThrottle: cpuThrottle.checked });
 
   // Guardar cambios de cada checkbox de YouTube.
   ytElements.forEach((el, i) =>

@@ -21,6 +21,11 @@
         <span class="text-muted">Intervalo (Segundos):</span>
         <input type="number" id="inputSeconds" min="10" max="3600">
       </div>
+      <hr style="border: 0; border-top: 1px dashed var(--border); margin: 10px 0;">
+      <div class="setting-row">
+        <span>Ahorro de CPU (Throttling)</span>
+        <label class="switch"><input type="checkbox" id="cpuThrottle"><span class="slider"></span></label>
+      </div>
     </div>
     <button id="navToWhitelist" class="btn-nav"><span>🛡️ Sitios Protegidos</span><span class="arrow">➔</span></button>
     <button id="navToAdvanced" class="btn-nav"><span>⚙️ Ajustes Avanzados</span><span class="arrow">➔</span></button>
@@ -60,6 +65,12 @@
         <div class="setting-row"><span>Diseño 2000s</span><label class="switch"><input type="checkbox" id="ytRetro"><span class="slider"></span></label></div>
         <div class="setting-row"><span>Bloquear Shorts</span><label class="switch"><input type="checkbox" id="ytNoShorts"><span class="slider"></span></label></div>
         <div class="setting-row"><span>Sin Esqueletos</span><label class="switch"><input type="checkbox" id="ytNoSkeletons"><span class="slider"></span></label></div>
+        <hr style="border: 0; border-top: 1px solid #fca5a5; margin: 10px 0;">
+        <h4 style="margin: 0 0 10px 0; color: #b91c1c; font-size: 13px;">🕰️ Modo "YouTube Antiguo"</h4>
+        <div class="setting-row"><span>Sin Avatares</span><label class="switch"><input type="checkbox" id="ytNoAvatars"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Barra Superior Estática</span><label class="switch"><input type="checkbox" id="ytStaticNav"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Grilla Compacta</span><label class="switch"><input type="checkbox" id="ytCompactGrid"><span class="slider"></span></label></div>
+        <div class="setting-row"><span>Sin Recomendados</span><label class="switch"><input type="checkbox" id="ytNoSidebar"><span class="slider"></span></label></div>
       </div>
     </div>
   </div>
