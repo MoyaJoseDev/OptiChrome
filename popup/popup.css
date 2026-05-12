@@ -1,100 +1,110 @@
 :root {
-  --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc;
-  --surface: #ffffff; --text: #1e293b; --text-muted: #64748b;
-  --border: #e2e8f0; --danger: #ef4444;
+  --bg-main: #050a15;
+  --bg-card: rgba(16, 23, 41, 0.8);
+  --border-neon: #00f2fe;
+  --neon-glow: 0 0 10px rgba(0, 242, 254, 0.4);
+  --yt-red: #ff4757;
+  --text-primary: #e2e8f0;
+  --text-dim: #94a3b8;
 }
-body { width: 340px; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-.container { padding: 16px; }
-h2 { margin: 0 0 16px 0; font-size: 18px; display: flex; align-items: center; gap: 8px; color: var(--primary); }
-h3 { margin: 0; font-size: 16px; }
-h4 { margin: 0 0 12px 0; color: #b91c1c; font-size: 14px; }
 
-.card { background: var(--surface); padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 12px; border: 1px solid var(--border); }
-.yt-card { border-color: #ef4444; background: #fef2f2; }
+body {
+  width: 360px; margin: 0; background: var(--bg-main);
+  color: var(--text-primary); font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
 
-.btn-manual { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-.btn-manual:hover { background: var(--primary-hover); }
+.container { padding: 20px; animation: fadeIn 0.4s ease-out; }
 
-.setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
-.switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+h2 { 
+  margin: 0 0 20px 0; font-size: 22px; color: var(--border-neon);
+  text-shadow: var(--neon-glow); display: flex; align-items: center; gap: 10px;
+}
+
+/* Tarjetas con efecto Glassmorphism */
+.card {
+  background: var(--bg-card); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+  padding: 16px; margin-bottom: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.btn-manual {
+  width: 100%; padding: 12px; background: transparent;
+  border: 1px solid var(--border-neon); color: var(--border-neon);
+  border-radius: 8px; font-weight: 700; cursor: pointer;
+  text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s;
+  box-shadow: inset var(--neon-glow);
+}
+
+.btn-manual:hover {
+  background: var(--border-neon); color: var(--bg-main);
+  box-shadow: 0 0 20px var(--border-neon);
+}
+
+/* Toggles Futuristas */
+.setting-row { 
+  display: flex; justify-content: space-between; align-items: center; 
+  margin-bottom: 14px; font-size: 14px;
+}
+
+.switch { position: relative; width: 44px; height: 22px; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 22px; }
-.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-input:checked + .slider { background-color: var(--primary); }
-input:checked + .slider:before { transform: translateX(18px); }
+.slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background: #1e293b; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+  position: absolute; content: ""; height: 16px; width: 16px;
+  left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background: var(--border-neon); box-shadow: var(--neon-glow); }
+input:checked + .slider:before { transform: translateX(22px); }
 
-.btn-nav { width: 100%; display: flex; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); padding: 12px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; transition: 0.2s; }
-.btn-nav:hover { background: #f1f5f9; }
+/* Navegación y Botones */
+.btn-nav {
+  width: 100%; padding: 14px; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+  color: white; cursor: pointer; display: flex; justify-content: space-between;
+  margin-bottom: 10px; transition: 0.3s;
+}
+.btn-nav:hover { background: rgba(0, 242, 254, 0.05); border-color: var(--border-neon); }
 
-.hidden { display: none !important; }
-.header-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-.btn-back { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-muted); padding: 0 5px; }
-
-.input-group { display: flex; gap: 8px; margin-top: 8px; }
-input[type="number"], input[type="text"] { flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
-.text-muted { font-size: 13px; align-self: center; color: var(--text-muted); }
-.btn-add { background: var(--text); color: white; border: none; padding: 0 12px; border-radius: 4px; cursor: pointer; font-weight: 500; }
-
-ul { list-style: none; padding: 0; margin: 12px 0 0 0; max-height: 250px; overflow-y: auto; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); }
-li { display: flex; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 13px; align-items: center; }
-.item-text { flex: 1; font-weight: 500; }
-.actions { display: flex; gap: 4px; }
-.btn-icon { background: none; border: none; cursor: pointer; border-radius: 4px; padding: 4px; font-size: 12px; }
-.btn-reset { width: 100%; background: transparent; color: var(--text-muted); border: 1px dashed var(--border); padding: 8px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
-
-/* Estilos para los Desplegables (Acordeones) */
-.accordion-btn { width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; margin-bottom: 8px; font-size: 14px; }
-.accordion-btn:hover { background: #f1f5f9; }
-.accordion-content { display: none; padding: 0 4px 10px 4px; margin-bottom: 10px; }
-.accordion-content.active { display: block; }
-.yt-theme { color: #b91c1c; border-left: 4px solid #ef4444; }
-.wa-theme { color: #15803d; border-left: 4px solid #22c55e; }
-.wa-card { border-color: #22c55e; background: #f0fdf4; }
-
-/* ================= ESTILOS DEL FOOTER Y DONACIONES ================= */
-.footer {
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--border);
+/* Tooltips e Iconos de Info */
+.info-icon {
+  margin-left: 6px; font-size: 12px; color: var(--text-dim);
+  cursor: help; border: 1px solid var(--text-dim);
+  border-radius: 50%; width: 15px; height: 15px;
+  display: inline-flex; align-items: center; justify-content: center;
 }
 
-.author-info {
-  margin-bottom: 10px;
-  line-height: 1.4;
+.info-icon:hover { color: var(--border-neon); border-color: var(--border-neon); }
+
+/* Lista de Sitios */
+#siteList { 
+  margin: 15px 0; padding: 0; list-style: none;
+  max-height: 150px; overflow-y: auto;
+}
+li {
+  background: rgba(0,0,0,0.2); padding: 10px; border-radius: 6px;
+  margin-bottom: 6px; display: flex; justify-content: space-between;
+  border-left: 3px solid var(--border-neon); font-size: 13px;
 }
 
-.footer a:not(.btn-donate) {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
+/* popup.css - Fragmento para el input de segundos */
+input[type="number"] {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--border-neon);
+  border-radius: 4px;
+  padding: 4px 8px;
+  outline: none;
+  font-weight: bold;
 }
 
-.footer a:not(.btn-donate):hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
+input[type="number"]:focus {
+  border-color: var(--border-neon);
+  box-shadow: 0 0 5px var(--neon-glow);
 }
 
-/* El botón de Donar */
-.btn-donate {
-  display: inline-block;
-  background: #f59e0b; /* Color ámbar/dorado */
-  color: white !important;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 12px;
-  transition: 0.2s;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.btn-donate:hover {
-  background: #d97706; /* Color ámbar oscuro al pasar el ratón */
-  transform: translateY(-1px); /* Pequeño efecto de elevación */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-}
+.hidden { display: none; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

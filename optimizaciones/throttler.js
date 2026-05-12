@@ -1,68 +1,63 @@
 // optimizaciones/throttler.js - Estrangulamiento de CPU Simulado
-console.log("🟢 OptiChrome: Throttler inyectado correctamente en " + window.location.hostname);
 
-let styleNode = null;
-let pausedVideos = [];
+(function() {
+  console.log("🟢 OptiChrome: Throttler inyectado correctamente en " + window.location.hostname);
 
-function checkVisibility() {
-  console.log("👁️ OptiChrome: Cambio de pestaña detectado. Estado:", document.visibilityState);
-  
-  chrome.storage.sync.get({ cpuThrottle: false, whitelist: [] }, (data) => {
-    if (chrome.runtime.lastError) return;
+  let styleNode = null;
+  let pausedVideos = [];
 
-    if (!data.cpuThrottle) return;
-
-    const urlLower = window.location.href.toLowerCase();
-    const isSafeZone = data.whitelist.some((site) => urlLower.includes(site));
+  function checkVisibility() {
+    console.log("👁️ OptiChrome: Cambio de pestaña detectado. Estado:", document.visibilityState);
     
-    if (isSafeZone) {
-      console.log("🛡️ OptiChrome: SafeZone. Evitando pausa.");
-      return; 
-    }
+    chrome.storage.sync.get({ cpuThrottle: false, whitelist: [] }, (data) => {
+      if (chrome.runtime.lastError) return;
+      if (!data.cpuThrottle) return;
 
-    // Usamos visibilityState en lugar de hidden
-    if (document.visibilityState === "hidden") {
-      console.log("⏸️ OptiChrome: Pestaña oculta. Congelando procesos...");
+      const urlLower = window.location.href.toLowerCase();
+      const isSafeZone = data.whitelist.some((site) => urlLower.includes(site));
       
-      if (!styleNode) {
-        styleNode = document.createElement("style");
-        styleNode.textContent = "* { animation-play-state: paused !important; }";
-        document.documentElement.appendChild(styleNode);
+      if (isSafeZone) {
+        console.log("🛡️ OptiChrome: SafeZone. Evitando pausa.");
+        return; 
       }
 
-      pausedVideos = [];
-      // Mejoramos la selección de reproductores
-      const videos = document.querySelectorAll("video");
-      console.log(`🎬 OptiChrome: ${videos.length} video(s) encontrado(s).`);
-      
-      videos.forEach((video) => {
-        if (!video.paused) {
-          video.pause();
-          pausedVideos.push(video);
-          console.log("⏸️ OptiChrome: Video pausado.");
+      if (document.visibilityState === "hidden") {
+        console.log("⏸️ OptiChrome: Pestaña oculta. Congelando procesos...");
+        
+        if (!styleNode) {
+          styleNode = document.createElement("style");
+          styleNode.textContent = "* { animation-play-state: paused !important; }";
+          document.documentElement.appendChild(styleNode);
         }
-      });
-      
-    } else if (document.visibilityState === "visible") {
-      console.log("▶️ OptiChrome: Pestaña visible. Restaurando...");
-      
-      if (styleNode && styleNode.parentNode) {
-        styleNode.parentNode.removeChild(styleNode);
-        styleNode = null;
+
+        pausedVideos = [];
+        const videos = document.querySelectorAll("video");
+        
+        videos.forEach((video) => {
+          if (!video.paused) {
+            video.pause();
+            pausedVideos.push(video);
+          }
+        });
+        
+      } else if (document.visibilityState === "visible") {
+        console.log("▶️ OptiChrome: Pestaña visible. Restaurando...");
+        
+        if (styleNode && styleNode.parentNode) {
+          styleNode.parentNode.removeChild(styleNode);
+          styleNode = null;
+        }
+
+        pausedVideos.forEach((video) => {
+          video.play().catch(() => {}); 
+        });
+        pausedVideos = [];
       }
+    });
+  }
 
-      pausedVideos.forEach((video) => {
-        video.play().catch(() => console.error("🔴 No se pudo reanudar el video")); 
-        console.log("▶️ OptiChrome: Video reanudado.");
-      });
-      pausedVideos = [];
-    }
+  document.addEventListener("visibilitychange", checkVisibility);
+  window.addEventListener("blur", () => {
+      if (document.visibilityState === "visible") checkVisibility(); 
   });
-}
-
-// Usamos el evento visibilitychange, pero también blur/focus por seguridad
-document.addEventListener("visibilitychange", checkVisibility);
-window.addEventListener("blur", () => {
-    // Simulamos un cambio de visibilidad si la ventana pierde el foco
-    if (document.visibilityState === "visible") checkVisibility(); 
-});
+})();
