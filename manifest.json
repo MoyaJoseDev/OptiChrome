@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OptiChrome",
-  "version": "2.4",
+  "version": "2.5",
   "description": "Optimiza la RAM congelando pestañas y acelera YouTube con un Modo Retro Anti-Lag. Proyecto OpenSource por José T. Moya.",
   "permissions": ["tabs", "storage", "alarms"],
   "icons": {
