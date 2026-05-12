@@ -1,35 +1,30 @@
 {
   "manifest_version": 3,
   "name": "OptiChrome",
-  "version": "2.5",
-  "description": "Optimiza la RAM congelando pestañas y acelera YouTube con un Modo Retro Anti-Lag. Proyecto OpenSource por José T. Moya.",
+  "version": "2.5.0",
+  "description": "Optimiza la RAM congelando pestañas y acelera tu navegador.",
   "permissions": ["tabs", "storage", "alarms"],
   "icons": {
-    "16": "iconos/icon-16.png",
-    "48": "iconos/icon-48.png",
-    "128": "iconos/icon-128.png"
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
   },
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "iconos/icon-16.png",
-      "48": "iconos/icon-48.png",
-      "128": "iconos/icon-128.png"
-    }
+    "default_popup": "index.html"
   },
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "src/background.js",
     "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "js": ["optimizaciones/youtube.js"],
+      "js": ["src/optimizaciones/youtube.js"],
       "run_at": "document_start"
     },
     {
       "matches": ["<all_urls>"],
-      "js": ["optimizaciones/throttler.js"]
+      "js": ["src/optimizaciones/throttler.js"]
     }
   ]
 }

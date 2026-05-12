@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Definimos tus colores personalizados de OptiChrome directamente en Tailwind v4 */
+@theme {
+  --color-bg-main: #050a15;
+  --color-bg-card: rgba(16, 23, 41, 0.9);
+  --color-border-neon: #00f2fe;
+  --color-yt-red: #ff4757;
+  --color-text-dim: #94a3b8;
+}
+
+body {
+  width: 360px;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--color-bg-main);
+  color: #e2e8f0;
+}
+
+/* Puedes seguir creando tus clases reutilizables aquí */
+@layer components {
+  .glass-card {
+    @apply bg-bg-card backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)];
+  }
+}
+
+/* src/index.css (Añadir al final) */
+
+/* ==========================================
+   SCROLLBAR PREMIUM (Para Ajustes Avanzados)
+   ========================================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 254, 0.6);
+}
