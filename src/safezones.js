@@ -1,5 +1,5 @@
-// safezones.js - esta es la lista de sitios que no queremos cerrar nunca.
-// Si querés, podés sumar más nombres aquí abajo.
+// safezones.js - lista inicial de sitios que OptiChrome no debe cerrar.
+// Estos términos se usan para proteger páginas importantes cuando se limpia RAM.
 
 export const defaultSafeZones = [
   // 🤖 IA y herramientas de conversación

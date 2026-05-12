@@ -1,5 +1,9 @@
+// Toggle.jsx - componente reusable para mostrar un interruptor de encendido/apagado.
+// Usa un checkbox visual y muestra un tooltip cuando el usuario pasa el cursor sobre el icono.
 export const Toggle = ({ label, checked, onChange, tooltip, isLast }) => (
-  <div className={`group flex justify-between items-center px-3 py-3 transition-colors hover:bg-white/5 ${!isLast ? 'border-b border-white/5' : ''}`}>
+  <div
+    className={`group flex justify-between items-center px-3 py-3 transition-colors hover:bg-white/5 ${!isLast ? "border-b border-white/5" : ""}`}
+  >
     <span className="flex items-center text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
       {label}
       {tooltip && (
@@ -12,7 +16,12 @@ export const Toggle = ({ label, checked, onChange, tooltip, isLast }) => (
       )}
     </span>
     <label className="relative inline-block w-10 h-5 cursor-pointer">
-      <input type="checkbox" className="sr-only peer" checked={checked} onChange={onChange} />
+      <input
+        type="checkbox"
+        className="sr-only peer"
+        checked={checked}
+        onChange={onChange}
+      />
       <div className="w-10 h-5 bg-slate-800 rounded-full peer peer-checked:bg-border-neon peer-checked:shadow-[0_0_12px_rgba(0,242,254,0.5)] transition-all after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-[20px]"></div>
     </label>
   </div>
