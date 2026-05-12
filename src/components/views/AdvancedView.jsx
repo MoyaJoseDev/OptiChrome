@@ -9,7 +9,7 @@ const SettingsGroup = ({ title, icon, children, titleColor }) => (
     >
       <span>{icon}</span> {title}
     </h4>
-    <div className="bg-[#0b1221] border border-white/10 rounded-xl overflow-hidden shadow-inner">
+    <div className="bg-[#0b1221] border border-white/10 rounded-xl overflow-visible shadow-inner">
       {children}
     </div>
   </div>

@@ -15,7 +15,7 @@ export const MainView = ({ settings, updateSetting, setView, forceClean }) => (
         Optimizar RAM
       </button>
     </div>
-    <div className="glass-card mb-5 !p-0 overflow-hidden">
+    <div className="glass-card mb-5 !p-0 overflow-visible">
       <Toggle
         label="Auto-RAM"
         tooltip="Congela pestañas inactivas automáticamente."
