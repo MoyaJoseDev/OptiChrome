@@ -1,57 +1,86 @@
-// OptiYT: este archivo arma los estilos que aplican la mejora en YouTube.
+// src/optimizaciones/youtube.js
+// Este archivo aplica mejoras visuales y de comportamiento en YouTube.
 
 const ytStyles = {
-  // Quita el modo ambiente y el blur extra en el reproductor.
   ytAmbient:
     "#cinematics, #cinematics-container, .ytd-watch-flexy-cinematic-node, ytd-watch-flexy[ambient-mode-fullscreen] #cinematics { display: none !important; background: transparent !important; }",
-
-  // Quita las miniaturas en movimiento y el overlay de preview.
   ytPreviews:
     "ytd-moving-thumbnail-renderer, #mouseover-overlay { display: none !important; }",
-
-  // Quita el chat en vivo.
   ytChat: "#chat, ytd-live-chat-frame { display: none !important; }",
-
-  // Quita los comentarios debajo del video.
   ytComments: "#comments { display: none !important; }",
-
-  // Modo retro: nada de bordes redondeados, ni animaciones.
   ytRetro:
     "* { border-radius: 0 !important; font-family: Arial, sans-serif !important; transition: none !important; animation: none !important; }",
-
-  // Quita los Shorts del feed y las sugerencias.
   ytNoShorts:
     "ytd-rich-shelf-renderer[is-shorts], ytd-reel-shelf-renderer, a[title='Shorts'], ytd-guide-entry-renderer:has(a[title='Shorts']) { display: none !important; }",
-
-  // Quita los esqueletos de carga pesada.
   ytNoSkeletons:
     "#ghost-cards, .skeleton-bg-color, ytd-skeleton-header-renderer { display: none !important; }",
-
-  // Quita las fotos de perfil en toda la plataforma (menos carga de imágenes).
-  ytNoAvatars: 
+  ytNoAvatars:
     "#avatar, yt-img-shadow, .yt-spec-avatar-shape { display: none !important; }",
-
-  // Hace que la barra superior no se quede pegada al bajar (ahorra repintado en la GPU).
-  ytStaticNav: 
+  ytStaticNav:
     "ytd-masthead { position: absolute !important; } #page-manager { margin-top: 0 !important; padding-top: 60px !important; }",
-
-  // Diseño compacto: achica el tamaño de las miniaturas en el inicio para que parezca el YT viejo.
-  ytCompactGrid: 
+  ytCompactGrid:
     "ytd-rich-grid-row { margin-bottom: 0 !important; } ytd-rich-item-renderer { margin-bottom: 10px !important; max-width: 250px !important; } ytd-rich-grid-renderer { --ytd-rich-grid-items-per-row: 6 !important; }",
-
-  // Oculta completamente la barra lateral de videos recomendados al ver un video.
-  ytNoSidebar: 
+  ytNoSidebar:
     "#secondary { display: none !important; } #primary { max-width: 100% !important; padding-right: 0 !important; }",
+
+  // 🛡️ CSS DEL ADBLOCK: Oculta banners, anuncios del feed y superposiciones.
+  ytAdBlockCSS: `
+    ytd-promoted-sparkles-web-renderer, 
+    ytd-display-ad-renderer, 
+    ytd-compact-promoted-video-renderer, 
+    ytd-promoted-video-renderer, 
+    #masthead-ad, 
+    ytd-banner-promo-renderer, 
+    .video-ads:not(.ytp-ad-showing), 
+    .ytp-ad-overlay-container,
+    .ytd-player-legacy-desktop-watch-ads-renderer,
+    div#root.style-scope.ytd-display-ad-renderer.yt-simple-endpoint { 
+      display: none !important; 
+    }
+  `,
 };
 
 const styleNode = document.createElement("style");
 styleNode.id = "opti-youtube-core";
 
-// Si el <head> todavía no está listo, inyectamos en el documento entero.
 if (document.head) {
   document.head.appendChild(styleNode);
 } else {
   document.documentElement.appendChild(styleNode);
+}
+
+// Intervalo que busca anuncios y los salta automáticamente.
+let adSkipInterval = null;
+
+function gestionarAutoSkip(activar) {
+  if (activar) {
+    if (!adSkipInterval) {
+      adSkipInterval = setInterval(() => {
+        // Busca botones de "Omitir anuncio" y los presiona si aparecen.
+        const skipBtn = document.querySelector(
+          ".ytp-ad-skip-button, .ytp-ad-skip-button-modern, .ytp-skip-ad-button",
+        );
+        if (skipBtn) {
+          skipBtn.click();
+        }
+
+        // 2. Si es un anuncio forzado (no se puede omitir), adelanta el video hasta el final
+        const isAdShowing = document.querySelector(".ad-showing");
+        if (isAdShowing) {
+          const video = document.querySelector("video");
+          if (video && !isNaN(video.duration)) {
+            video.currentTime = video.duration;
+          }
+        }
+      }, 300); // Revisa anuncios cada 300ms.
+    }
+  } else {
+    // Si el usuario apaga el adblocker, detenemos el escáner
+    if (adSkipInterval) {
+      clearInterval(adSkipInterval);
+      adSkipInterval = null;
+    }
+  }
 }
 
 function aplicarYT() {
@@ -68,6 +97,7 @@ function aplicarYT() {
       "ytStaticNav",
       "ytCompactGrid",
       "ytNoSidebar",
+      "ytAdBlock",
     ],
     (data) => {
       let css = "";
@@ -78,18 +108,22 @@ function aplicarYT() {
       if (data.ytRetro) css += ytStyles.ytRetro + "\n";
       if (data.ytNoShorts) css += ytStyles.ytNoShorts + "\n";
       if (data.ytNoSkeletons) css += ytStyles.ytNoSkeletons + "\n";
-      // ... dentro de chrome.storage.sync.get ...
       if (data.ytNoAvatars) css += ytStyles.ytNoAvatars + "\n";
       if (data.ytStaticNav) css += ytStyles.ytStaticNav + "\n";
       if (data.ytCompactGrid) css += ytStyles.ytCompactGrid + "\n";
       if (data.ytNoSidebar) css += ytStyles.ytNoSidebar + "\n";
 
+      // Aplicamos el CSS de publicidad si está activo
+      if (data.ytAdBlock) css += ytStyles.ytAdBlockCSS + "\n";
+
       styleNode.textContent = css;
+
+      // Arrancamos o detenemos el salto automático de videos
+      gestionarAutoSkip(data.ytAdBlock);
     },
   );
 }
 
-// Ejecuta al cargar la página y cada vez que cambia algo en storage.
 aplicarYT();
 chrome.storage.onChanged.addListener((changes) => {
   if (Object.keys(changes).some((key) => key.startsWith("yt"))) {
